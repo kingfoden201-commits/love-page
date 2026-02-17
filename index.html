@@ -9,16 +9,24 @@ body {
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to right, pink, orange); /* Updated colors */
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #fbc2eb, #ff9a9e);
+    background-size: 1200% 1200%;
+    animation: gradientMove 15s ease infinite;
     text-align: center;
     font-family: Arial, sans-serif;
     color: white;
 }
 
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 /* Floating hearts */
 .heart {
     position: absolute;
-    font-size: 35px; /* medium size */
+    font-size: 35px;
     animation: float 6s linear infinite;
     user-select: none;
 }
@@ -28,14 +36,40 @@ body {
     100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
 }
 
+/* Teddy holding hands container */
+.teddy-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    animation: danceTogether 1s infinite alternate;
+}
+
+.teddy-container img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Dance animation for holding hands */
+@keyframes danceTogether {
+    0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(-20px) rotate(10deg); }
+    100% { transform: translateX(-50%) translateY(0) rotate(-10deg); }
+}
+
 h1 {
     font-size: 60px;
     margin-top: 50px;
+    text-shadow: 2px 2px 5px #000;
 }
 
 p {
     font-size: 28px;
     margin: 10px;
+    text-shadow: 1px 1px 3px #000;
 }
 </style>
 </head>
@@ -49,6 +83,12 @@ p {
 
 <!-- Floating hearts container -->
 <div id="hearts"></div>
+
+<!-- Teddy bears holding hands -->
+<div class="teddy-container">
+    <img src="https://i.imgur.com/x2OczWZ.png" alt="Male Teddy">
+    <img src="https://i.imgur.com/8uNw3Bq.png" alt="Female Teddy">
+</div>
 
 <!-- Background music -->
 <audio autoplay loop>
@@ -66,8 +106,6 @@ function createHeart() {
     heart.style.left = Math.random() * window.innerWidth + 'px';
     heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
     heartsContainer.appendChild(heart);
-
-    // Remove heart after animation
     setTimeout(() => heartsContainer.removeChild(heart), 6000);
 }
 
