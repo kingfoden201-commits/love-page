@@ -2,24 +2,24 @@ index.html
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You ❤️💖</title>
+<title>I LOVE YOU VICKY ❤️</title>
 <style>
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(to right, pink, orange);
+    background: linear-gradient(to right, pink, orange); /* Updated colors */
     text-align: center;
     font-family: Arial, sans-serif;
     color: white;
 }
 
-/* Floating hearts animation */
+/* Floating hearts */
 .heart {
     position: absolute;
-    font-size: 30px;
-    animation: float 5s linear infinite;
+    font-size: 35px; /* medium size */
+    animation: float 6s linear infinite;
     user-select: none;
 }
 
@@ -41,7 +41,7 @@ p {
 </head>
 <body>
 
-<h1>❤️💖 I LOVE YOU VICKY❤️💖</h1>
+<h1>❤️ I LOVE YOU VICKY ❤️</h1>
 <p>You are my sunshine ☀️🌹💘</p>
 <p>My heart beats only for you 💕💓💞💗</p>
 <p>Forever yours 😘💖💖💖</p>
@@ -56,7 +56,7 @@ p {
 </audio>
 
 <script>
-// Create floating hearts
+// Floating hearts script
 const heartsContainer = document.getElementById('hearts');
 const heartEmojis = ['❤️','💖','💘','💞','💕','💓','💗','💝'];
 
@@ -64,16 +64,15 @@ function createHeart() {
     const heart = document.createElement('div');
     heart.className = 'heart';
     heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
     heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
     heartsContainer.appendChild(heart);
 
-    // Remove after animation
-    setTimeout(() => heartsContainer.removeChild(heart), 5000);
+    // Remove heart after animation
+    setTimeout(() => heartsContainer.removeChild(heart), 6000);
 }
 
-// Create hearts every 300ms
-setInterval(createHeart, 300);
+// Generate hearts every 400ms
+setInterval(createHeart, 400);
 </script>
 
 </body>
