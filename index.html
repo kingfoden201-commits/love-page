@@ -2,30 +2,79 @@ index.html
 <!DOCTYPE html>
 <html>
 <head>
-<title>For You ❤️</title>
+<title>For You ❤️💖</title>
 <style>
-body{
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
     background: linear-gradient(to right, pink, red);
     text-align: center;
     font-family: Arial, sans-serif;
     color: white;
-    padding-top: 100px;
 }
-h1{
-    font-size: 50px;
+
+/* Floating hearts animation */
+.heart {
+    position: absolute;
+    font-size: 30px;
+    animation: float 5s linear infinite;
+    user-select: none;
 }
-p{
-    font-size: 25px;
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 50px;
+}
+
+p {
+    font-size: 28px;
+    margin: 10px;
 }
 </style>
 </head>
-
 <body>
 
-<h1>❤️ I Love You ❤️</h1>
-<p>You are my happiness 💕</p>
-<p>Forever and always 😘</p>
-<p>❤️❤️❤️❤️❤️</p>
+<h1>❤️💖 I LOVE YOU ❤️💖</h1>
+<p>You are my sunshine ☀️🌹💘</p>
+<p>My heart beats only for you 💕💓💞💗</p>
+<p>Forever yours 😘💖💖💖</p>
+<p>Every moment with you is magical ✨💝🌸</p>
+
+<!-- Floating hearts container -->
+<div id="hearts"></div>
+
+<!-- Background music -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Create floating hearts
+const heartsContainer = document.getElementById('hearts');
+const heartEmojis = ['❤️','💖','💘','💞','💕','💓','💗','💝'];
+
+function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+    heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    heartsContainer.appendChild(heart);
+
+    // Remove after animation
+    setTimeout(() => heartsContainer.removeChild(heart), 5000);
+}
+
+// Create hearts every 300ms
+setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
