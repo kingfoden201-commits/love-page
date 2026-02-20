@@ -7,163 +7,126 @@ index.html
 body{
     margin:0;
     padding:0;
-    height:100vh;
     overflow:hidden;
+    height:100vh;
     font-family: 'Georgia', serif;
-    background: radial-gradient(circle at top, #2c003e, #000000);
+    background: radial-gradient(circle at bottom, #0d001a, #000000 80%);
     color:white;
     text-align:center;
 }
 
+/* Stars background */
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:transparent;
+    box-shadow:
+        20px 30px white,
+        100px 200px white,
+        300px 150px white,
+        500px 100px white,
+        700px 250px white,
+        900px 180px white,
+        1100px 300px white;
+    animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:0.5;}
+    to{opacity:1;}
+}
+
 /* Titles */
 h1{
-    margin-top:30px;
-    font-size:50px;
+    margin-top:60px;
+    font-size:55px;
     text-shadow:0 0 20px pink;
 }
 
 h2{
     font-size:35px;
-    color:#ffb6c1;
-    text-shadow:0 0 15px #ff69b4;
+    color:#ff99cc;
+    text-shadow:0 0 15px hotpink;
 }
 
-/* Glowing photo frame */
-.photo-frame{
-    width:150px;
-    height:150px;
-    margin:15px auto;
-    border-radius:50%;
-    border:4px solid pink;
-    box-shadow:0 0 20px hotpink;
-    background-size:cover;
-    background-position:center;
-}
-
-/* Cake */
-.cake{
-    position:relative;
-    width:220px;
-    height:130px;
-    background:#ffb6c1;
-    margin:30px auto;
-    border-radius:10px;
-    box-shadow:0 10px 30px rgba(255,105,180,0.5);
-}
-
-/* Candle */
-.candle{
-    position:absolute;
-    width:15px;
-    height:50px;
-    background:white;
-    top:-50px;
-    left:50%;
-    transform:translateX(-50%);
-    cursor:pointer;
-}
-
-.flame{
-    position:absolute;
-    width:20px;
-    height:30px;
-    background:gold;
-    border-radius:50%;
-    top:-30px;
-    left:50%;
-    transform:translateX(-50%);
-    animation:flicker 0.2s infinite alternate;
-}
-
-@keyframes flicker{
-    from{transform:translateX(-50%) scale(1);}
-    to{transform:translateX(-50%) scale(1.1);}
-}
-
-/* Teddy */
-.teddy{
-    font-size:80px;
-    position:absolute;
-    left:10%;
-    bottom:50px;
-    cursor:pointer;
-    transition:all 2s ease;
-}
-
-/* Magic particles */
-.particle{
-    position:absolute;
-    color:white;
-    font-size:14px;
-    animation:floatUp 6s linear infinite;
-}
-
-@keyframes floatUp{
-    0%{transform:translateY(100vh); opacity:1;}
-    100%{transform:translateY(-50px); opacity:0;}
-}
-
-/* Wish message */
-#wishMessage{
-    display:none;
+p{
     font-size:22px;
-    margin-top:20px;
-    color:#ff69b4;
-    text-shadow:0 0 10px pink;
+    margin:10px;
+    opacity:0.9;
+}
+
+/* Falling items */
+.fall{
+    position:absolute;
+    font-size:25px;
+    animation: fall 8s linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-50px);}
+    100%{transform:translateY(100vh);}
+}
+
+/* Shooting star */
+.shooting{
+    position:absolute;
+    width:3px;
+    height:80px;
+    background:white;
+    animation: shoot 3s linear infinite;
+}
+
+@keyframes shoot{
+    0%{
+        transform:translate(-100px,-100px) rotate(45deg);
+        opacity:1;
+    }
+    100%{
+        transform:translate(100vw,100vh) rotate(45deg);
+        opacity:0;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<h1>Happy Birthday My Love 🎂</h1>
+<div class="stars"></div>
+
+<h1>Happy Birthday My Queen 🎂🌹</h1>
 <h2>❤️ VICKY ❤️</h2>
 
-<!-- Add her image link inside url() -->
-<div class="photo-frame" 
-style="background-image: url('YOUR_IMAGE_LINK_HERE');">
-</div>
-
-<div class="cake">
-    <div class="candle" onclick="blowCandle()">
-        <div class="flame" id="flame"></div>
-    </div>
-</div>
-
-<div class="teddy" id="teddy" onclick="moveTeddy()">🧸</div>
-
-<div id="wishMessage">
-💖 The teddy made a wish for us to stay together forever.  
-Happy Birthday my queen 👑✨ 💖
-</div>
+<p>Under these endless stars, my love for you shines brighter ✨</p>
+<p>May your heart be filled with joy and magic 💖</p>
+<p>You are my universe 🌌</p>
 
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const teddy = document.getElementById("teddy");
-const flame = document.getElementById("flame");
+const items = ['❤️','💖','💕','🌹','💘'];
 
-function moveTeddy(){
-    teddy.style.left = "45%";
+function createFalling(){
+    const el = document.createElement("div");
+    el.className="fall";
+    el.style.left=Math.random()*window.innerWidth+"px";
+    el.innerText=items[Math.floor(Math.random()*items.length)];
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),8000);
 }
 
-function blowCandle(){
-    flame.style.display = "none";
-    document.getElementById("wishMessage").style.display="block";
+function createShooting(){
+    const star=document.createElement("div");
+    star.className="shooting";
+    star.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(star);
+    setTimeout(()=>star.remove(),3000);
 }
 
-/* Magic particles */
-function createParticle(){
-    const particle=document.createElement("div");
-    particle.className="particle";
-    particle.style.left=Math.random()*window.innerWidth+"px";
-    particle.innerText="✨";
-    document.body.appendChild(particle);
-    setTimeout(()=>particle.remove(),6000);
-}
-setInterval(createParticle,400);
+setInterval(createFalling,500);
+setInterval(createShooting,4000);
 </script>
 
 </body>
