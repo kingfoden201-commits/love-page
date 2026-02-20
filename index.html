@@ -2,19 +2,19 @@ index.html
 <!DOCTYPE html>
 <html>
 <head>
-<title>I LOVE YOU VICKY ❤️</title>
+<title>Happy Birthday My Love ❤️</title>
 <style>
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     overflow: hidden;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee, #fbc2eb, #ff9a9e);
-    background-size: 1200% 1200%;
-    animation: gradientMove 15s ease infinite;
-    text-align: center;
     font-family: Arial, sans-serif;
+    text-align: center;
     color: white;
+    background: linear-gradient(135deg, #ff6a88, #ff99ac, #ffb6c1);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
 }
 
 @keyframes gradientMove {
@@ -23,82 +23,113 @@ body {
     100% { background-position: 0% 50%; }
 }
 
-/* Floating hearts */
-.heart {
-    position: absolute;
-    font-size: 35px;
-    animation: float 6s linear infinite;
-    user-select: none;
-}
-
-@keyframes float {
-    0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
-}
-
-/* Teddy holding hands container */
-.teddy-container {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: flex-end;
-    gap: 20px;
-    animation: danceTogether 1s infinite alternate;
-}
-
-.teddy-container img {
-    width: 100px;
-    height: 100px;
-}
-
-/* Dance animation for holding hands */
-@keyframes danceTogether {
-    0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-    50% { transform: translateX(-50%) translateY(-20px) rotate(10deg); }
-    100% { transform: translateX(-50%) translateY(0) rotate(-10deg); }
-}
-
 h1 {
-    font-size: 60px;
+    font-size: 55px;
     margin-top: 50px;
-    text-shadow: 2px 2px 5px #000;
+    text-shadow: 2px 2px 10px #000;
+}
+
+.glow {
+    font-size: 45px;
+    color: #fff;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #fff; }
+    to { text-shadow: 0 0 25px #ff1493; }
 }
 
 p {
-    font-size: 28px;
+    font-size: 22px;
     margin: 10px;
-    text-shadow: 1px 1px 3px #000;
+    text-shadow: 1px 1px 5px #000;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    font-size: 28px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+}
+
+/* Falling roses */
+.rose {
+    position: absolute;
+    font-size: 30px;
+    animation: fall 8s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Popup love letter */
+.popup {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    color: #ff1493;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px pink;
+    width: 300px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background: #ff1493;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
 }
 </style>
 </head>
+
 <body>
 
-<h1>❤️ I LOVE YOU VICKY ❤️</h1>
-<p>You are my sunshine ☀️🌹💘</p>
-<p>My heart beats only for you 💕💓💞💗</p>
-<p>Forever yours 😘💖💖💖</p>
-<p>Every moment with you is magical ✨💝🌸</p>
+<h1>🎂 Happy Birthday My Love 🎂</h1>
+<div class="glow">❤️ VICKY ❤️</div>
 
-<!-- Floating hearts container -->
-<div id="hearts"></div>
+<p>You are the most precious gift in my life 💕</p>
+<p>May your smile shine brighter than the stars birthday blessing my princess ✨</p>
+<p>I am so lucky to love you 😘</p>
+<p>Forever yours ❤️</p>
+<p>💍 Will you always be mine? 💍</p>
 
-<!-- Teddy bears holding hands -->
-<div class="teddy-container">
-    <img src="https://i.imgur.com/x2OczWZ.png" alt="Male Teddy">
-    <img src="https://i.imgur.com/8uNw3Bq.png" alt="Female Teddy">
+<button onclick="showPopup()">💌 Click Me My Love 💌</button>
+
+<div class="popup" id="lovePopup">
+    <h3>My Love Letter ❤️</h3>
+    <p>From the moment you came into my life, everything became beautiful.  
+    You are my happiness, my peace, my forever.  
+    Happy Birthday my queen 👑💖</p>
+    <button onclick="closePopup()">Close</button>
 </div>
 
-<!-- Background music -->
+<div id="hearts"></div>
+<div id="roses"></div>
+
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-// Floating hearts script
 const heartsContainer = document.getElementById('hearts');
-const heartEmojis = ['❤️','💖','💘','💞','💕','💓','💗','💝'];
+const rosesContainer = document.getElementById('roses');
+const heartEmojis = ['❤️','💖','💕','💘','💝'];
+const roseEmoji = '🌹';
 
 function createHeart() {
     const heart = document.createElement('div');
@@ -106,11 +137,28 @@ function createHeart() {
     heart.style.left = Math.random() * window.innerWidth + 'px';
     heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
     heartsContainer.appendChild(heart);
-    setTimeout(() => heartsContainer.removeChild(heart), 6000);
+    setTimeout(() => heart.remove(), 6000);
 }
 
-// Generate hearts every 400ms
-setInterval(createHeart, 400);
+function createRose() {
+    const rose = document.createElement('div');
+    rose.className = 'rose';
+    rose.style.left = Math.random() * window.innerWidth + 'px';
+    rose.innerText = roseEmoji;
+    rosesContainer.appendChild(rose);
+    setTimeout(() => rose.remove(), 8000);
+}
+
+setInterval(createHeart, 500);
+setInterval(createRose, 800);
+
+function showPopup() {
+    document.getElementById("lovePopup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("lovePopup").style.display = "none";
+}
 </script>
 
 </body>
